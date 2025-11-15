@@ -1,34 +1,100 @@
-# ADK Agent Project
+# AI Agents for Social Good 🌍
 
-AI agents built with Google's Agent Development Kit (ADK) following the official tutorial.
+Community-focused AI agents built with Google's Agent Development Kit (ADK) to benefit larger communities and support important social causes.
 
-## Project Structure
+## 🎯 Project Mission
 
-```
-.
-├── agents/                      # ADK agents directory (for web UI)
-│   ├── sample-agent/           # Simple helpful assistant
-│   │   ├── agent.py            # Agent configuration with Google Search
-│   │   ├── test_agent.py       # Test script
-│   │   ├── .env                # API key configuration
-│   │   └── __init__.py         # Package initialization
-│   │
-│   └── research-agent/         # Research Paper Finder (debugging exercise)
-│       ├── agent.py            # Multi-agent with intentional bug
-│       ├── test_agent.py       # Test script
-│       ├── .env                # API key configuration
-│       ├── __init__.py         # Package initialization
-│       └── README.md           # Agent-specific documentation
-│
-├── sample-agent/               # Original agent (duplicate)
-├── adk_agent.py                # Standalone agent implementation
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
-├── PROJECT_STRUCTURE_AND_API_USAGE.md  # Complete project analysis
-└── RESEARCH_AGENT_GUIDE.md     # Research agent quick start guide
-```
+Build AI agents that serve communities by providing 24/7 access to resources, information, and support for critical social needs. These agents connect people with local services, educational opportunities, mental health resources, and civic engagement tools.
 
-## Setup
+---
+
+## 🤖 Six Community-Focused Agents
+
+### 1. 💚 Mental Health Support Agent
+**Purpose:** Provide mental health resources, crisis support, and compassionate guidance
+
+**Features:**
+- Crisis hotlines (988, Crisis Text Line, international resources)
+- Evidence-based coping strategies
+- Local mental health services finder
+- Support group connections
+- Safety-first approach with professional referrals
+
+**Example:** *"I'm feeling anxious. What resources are available?"*
+
+---
+
+### 2. 🍽️ Food Security Helper
+**Purpose:** Connect people with food assistance and promote food security
+
+**Features:**
+- Food bank and pantry locator
+- SNAP/WIC application guidance
+- Budget meal planning
+- Community garden connections
+- Nutrition education
+
+**Example:** *"Find food banks near zip code 90210"*
+
+---
+
+### 3. 📚 Education Equity Guide
+**Purpose:** Make quality education accessible to everyone
+
+**Features:**
+- Free online learning platforms (Khan Academy, Coursera, etc.)
+- Scholarship and financial aid finder
+- Tutoring and mentorship programs
+- Alternative education pathways
+- Adult education resources
+
+**Example:** *"Free online courses for learning Python"*
+
+---
+
+### 4. 🌱 Climate Action Helper
+**Purpose:** Empower individuals and communities to take climate action
+
+**Features:**
+- Carbon footprint reduction tips
+- Local climate groups and volunteer opportunities
+- Sustainable living resources
+- Government incentives (solar, EV rebates)
+- Climate policy engagement
+
+**Example:** *"How can I reduce my carbon footprint at home?"*
+
+---
+
+### 5. ♿ Accessibility Advocate
+**Purpose:** Promote digital accessibility and inclusive design
+
+**Features:**
+- WCAG/ADA compliance guidance
+- Assistive technology resources
+- Accessibility testing tools
+- Alt text and caption best practices
+- Inclusive design principles
+
+**Example:** *"How do I make my website WCAG compliant?"*
+
+---
+
+### 6. 🗳️ Civic Engagement Guide
+**Purpose:** Help people participate in democracy and build communities
+
+**Features:**
+- Voter registration assistance
+- Representative contact information
+- Public meeting schedules
+- Community organizing resources
+- Government structure education
+
+**Example:** *"How do I register to vote in New York?"*
+
+---
+
+## 🚀 Quick Start
 
 ### 1. Install Dependencies
 ```bash
@@ -36,175 +102,302 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure API Key (Required)
-⚠️ **Important:** You need to add your own Google API key to use the agents.
+⚠️ **Important:** You need your own Google API key.
 
 1. Get your API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
 2. Copy `.env.example` to `.env` and add your key
-3. Create `.env` files in each agent directory with your key
+3. Create `.env` files in each agent directory
 
 **See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed instructions.**
 
-Quick setup:
+### 3. Launch the Agents
 ```bash
-# Copy example file
-copy .env.example .env
+# Web UI (recommended)
+python -m google.adk.cli web agents --port 8080
 
-# Edit .env and add your API key
-# Then create .env files for each agent (see SETUP_GUIDE.md)
+# Open http://127.0.0.1:8080 in your browser
 ```
 
-## Running the Agent
-
-### Method 1: ADK Web UI (Recommended)
-The web UI provides the best experience with visual traces of agent thoughts and actions.
-
+**Alternative: CLI Mode**
 ```bash
-python -m google.adk.cli web agents
+python -m google.adk.cli run agents/mental-health-support
 ```
-
-Then open your browser to: **http://127.0.0.1:8000**
-
-**Features:**
-- Interactive chat interface
-- Visual trace of agent reasoning
-- See when and why the agent uses Google Search
-- Step-by-step execution flow
-- Session management
-
-To stop the server: Press `Ctrl+C`
-
-### Method 2: Command Line (Interactive)
-Run the agent directly from the command line:
-
-```bash
-python -m google.adk.cli run agents/sample-agent
-```
-
-This starts an interactive session where you can chat with the agent in your terminal.
-
-### Method 3: Python Script (Programmatic)
-Run the standalone Python script:
-
-```bash
-python adk_agent.py
-```
-
-Or run the test script:
-
-```bash
-python sample-agent/test_agent.py
-```
-
-### Method 4: API Server
-Start an API server to interact with the agent via HTTP:
-
-```bash
-python -m google.adk.cli api_server agents
-```
-
-The API will be available at: **http://127.0.0.1:8000**
-
-You can then make POST requests to interact with the agent.
-
-## Agents in This Project
-
-### 1. Sample Agent (Helpful Assistant)
-- **Model**: Gemini 2.5 Flash Lite
-- **Tools**: Google Search for real-time information
-- **Purpose**: General Q&A and information retrieval
-- **Location**: `agents/sample-agent/`
-
-### 2. Research Agent (Paper Finder) 🆕
-- **Model**: Gemini 2.5 Flash Lite
-- **Tools**: Google Search + Custom count_papers function
-- **Plugins**: LoggingPlugin for comprehensive observability
-- **Purpose**: Find and count academic research papers
-- **Special**: Contains an intentional bug for debugging practice!
-- **Location**: `agents/research-agent/`
-- **Guides**: 
-  - `RESEARCH_AGENT_GUIDE.md` - Quick start
-  - `agents/research-agent/LOGGING_PLUGIN_GUIDE.md` - Observability guide
-
-## Common Features
-
-- **Retry Logic**: Automatic retry on rate limits and errors
-- **Session Management**: Maintains conversation context
-- **Multi-Agent Support**: Agents can delegate to other agents
-
-## How It Works
-
-The agent follows an agentic workflow:
-
-1. **User Query** → Agent receives your question
-2. **Reasoning** → Agent thinks about what information is needed
-3. **Tool Use** → Agent decides to use Google Search if needed
-4. **Observation** → Agent processes search results
-5. **Response** → Agent provides an informed answer
-
-This is different from a simple LLM - the agent can actively search for current information!
-
-## Example Queries
-
-### Sample Agent:
-- "What is Agent Development Kit from Google? What languages is the SDK available in?"
-- "What are the latest features in Gemini 2.0?"
-- "How do I build a multi-agent system with ADK?"
-
-### Research Agent:
-- "Find latest quantum computing papers"
-- "Search for machine learning research papers"
-- "Get recent papers on climate change"
-- Note: The count will be wrong due to the intentional bug! See `RESEARCH_AGENT_GUIDE.md` to learn how to debug it.
-
-## Troubleshooting
-
-### "Failed to load agents" in Web UI
-Make sure you're running the web command with the `agents` directory:
-```bash
-python -m google.adk.cli web agents
-```
-
-### "Missing API key" error
-Ensure your `.env` file contains:
-```
-GOOGLE_API_KEY=your_actual_api_key
-```
-
-### "adk command not found"
-Use the full Python module syntax:
-```bash
-python -m google.adk.cli [command]
-```
-
-## 🐞 Debugging Exercise: Research Agent
-
-The **research-agent** is a hands-on debugging exercise! It contains an intentional bug where the `count_papers` function has the wrong type annotation.
-
-**Quick Start:**
-```bash
-# Start web UI with debug logs
-python -m google.adk.cli web agents --log_level DEBUG
-
-# Open http://127.0.0.1:8000
-# Select "research-agent"
-# Try: "Find latest quantum computing papers"
-# Notice the count is way too high!
-```
-
-**Learn how to:**
-- Use the Events tab to trace agent execution
-- Read DEBUG logs to find bugs
-- Understand how type annotations guide LLMs
-- Debug multi-agent systems
-
-**Full guide:** See `RESEARCH_AGENT_GUIDE.md` for step-by-step debugging instructions.
 
 ---
 
-## Additional Resources
+## 📁 Project Structure
 
-- [ADK Documentation](https://github.com/google/adk)
+```
+.
+├── agents/                                    # Community-focused agents
+│   ├── mental-health-support/                # Crisis resources & support
+│   ├── food-security-helper/                 # Food assistance & nutrition
+│   ├── education-equity-guide/               # Free learning & scholarships
+│   ├── climate-action-helper/                # Environmental action
+│   ├── accessibility-advocate/               # Digital inclusion
+│   ├── civic-engagement-guide/               # Democracy & organizing
+│   ├── research-agent/                       # Academic paper finder (with bug)
+│   └── sample-agent/                         # Simple helpful assistant
+│
+├── 📚 Documentation
+│   ├── README.md                             # This file
+│   ├── SETUP_GUIDE.md                        # Detailed setup instructions
+│   ├── COMMUNITY_AGENTS_QUICKSTART.md        # Quick start with examples
+│   ├── COMMUNITY_AGENTS_OVERVIEW.md          # Complete overview
+│   ├── COMMUNITY_AGENTS_SUMMARY.md           # Impact & vision
+│   ├── PROJECT_OVERVIEW.md                   # Technical details
+│   └── SECURITY_NOTICE.md                    # Important security info
+│
+├── .env.example                              # API key template
+├── .gitignore                                # Prevents committing secrets
+├── requirements.txt                          # Python dependencies
+└── test_community_agent.py                   # Test script
+```
+
+---
+
+## 💡 Example Use Cases
+
+### For Individuals
+- Find local resources and support services
+- Learn new skills for free
+- Take action on issues you care about
+- Get involved in your community
+- Make informed decisions
+
+### For Organizations
+- Embed agents on websites for 24/7 information
+- Reduce staff workload on common questions
+- Improve service accessibility
+- Reach more people in need
+- Scale support beyond human capacity
+
+### For Developers
+- Learn to build socially-conscious AI
+- Practice agent development with ADK
+- Understand community needs
+- Implement safety protocols
+- Contribute to social good
+
+---
+
+## 🎯 Key Features
+
+### For Users
+✅ 24/7 availability  
+✅ No judgment or stigma  
+✅ Local, current resources via Google Search  
+✅ Actionable, practical guidance  
+✅ Free and accessible  
+✅ Privacy-respecting  
+
+### For Developers
+✅ Built with Google ADK  
+✅ Easy to customize and extend  
+✅ Well-documented code  
+✅ Safety protocols included  
+✅ Accessibility-focused design  
+✅ Open for contributions  
+
+---
+
+## 🔒 Safety & Ethics
+
+### Built-in Safeguards
+- Mental health agent prioritizes crisis resources
+- All agents direct to professional help when needed
+- Non-judgmental, dignity-preserving language
+- Evidence-based information
+- Clear disclaimers about limitations
+- Privacy-respecting (no data storage)
+
+### What These Agents Are NOT
+- ❌ Not professional therapists, doctors, or lawyers
+- ❌ Not direct service providers
+- ❌ Not emergency services
+- ❌ Not guaranteed to be 100% accurate
+- ❌ Not a substitute for human connection
+
+---
+
+## 📖 Documentation
+
+### Getting Started
+- **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Detailed setup instructions
+- **[COMMUNITY_AGENTS_QUICKSTART.md](COMMUNITY_AGENTS_QUICKSTART.md)** - Quick start with 30+ example queries
+
+### Full Documentation
+- **[COMMUNITY_AGENTS_OVERVIEW.md](COMMUNITY_AGENTS_OVERVIEW.md)** - Complete overview & poster prompt
+- **[COMMUNITY_AGENTS_SUMMARY.md](agents/COMMUNITY_AGENTS_SUMMARY.md)** - Impact, metrics, and future vision
+- **[agents/COMMUNITY_AGENTS_README.md](agents/COMMUNITY_AGENTS_README.md)** - Detailed agent documentation
+
+### Technical Details
+- **[PROJECT_OVERVIEW.md](PROJECT_OVERVIEW.md)** - Complete technical overview
+- **[SECURITY_NOTICE.md](SECURITY_NOTICE.md)** - Important security information
+
+---
+
+## 🛠️ Technical Stack
+
+- **Framework:** Google Agent Development Kit (ADK)
+- **Model:** Gemini 2.5 Flash Lite
+- **Tools:** Google Search for real-time information
+- **Language:** Python 3.13+
+- **Features:** Retry logic, session management, multi-agent support
+
+---
+
+## 🌟 Design Principles
+
+1. **Equity** - Everyone deserves access to resources
+2. **Dignity** - Respectful, non-judgmental support
+3. **Empowerment** - Knowledge enables action
+4. **Community** - Collective solutions to shared challenges
+5. **Accessibility** - Information for all abilities
+6. **Safety** - Prioritize user wellbeing
+7. **Transparency** - Clear about capabilities and limits
+
+---
+
+## 🤝 Contributing
+
+Want to improve these agents or add new ones?
+
+### Ideas for Contributions
+- Add agents for housing, healthcare, legal aid, jobs
+- Improve language support for non-English speakers
+- Create custom tools for specific calculations
+- Enhance accessibility features
+- Add testing and validation
+- Improve documentation
+
+### How to Contribute
+1. Fork the repository
+2. Create a new agent following the existing structure
+3. Test thoroughly with diverse queries
+4. Document your agent
+5. Submit a pull request
+
+---
+
+## 📞 Crisis Resources
+
+If you or someone you know is in crisis:
+
+- **National Suicide Prevention Lifeline:** 988 (US)
+- **Crisis Text Line:** Text HOME to 741741
+- **International:** https://www.iasp.info/resources/Crisis_Centres/
+- **Emergency Services:** 911 (US) or your local emergency number
+
+---
+
+## 🐞 Bonus: Debugging Exercise
+
+The **research-agent** is a hands-on debugging exercise with an intentional bug!
+
+```bash
+python -m google.adk.cli web agents --log_level DEBUG
+# Select "research-agent" and try: "Find latest quantum computing papers"
+# Notice the count is way too high!
+```
+
+Learn how to use the Events tab and DEBUG logs to find and fix bugs in multi-agent systems.
+
+---
+
+## 🎓 Learning Resources
+
+- [Google ADK Documentation](https://github.com/google/adk)
 - [Google AI Studio](https://aistudio.google.com/)
 - [Gemini API Docs](https://ai.google.dev/)
-- `PROJECT_STRUCTURE_AND_API_USAGE.md` - Complete project analysis
-- `RESEARCH_AGENT_GUIDE.md` - Research agent debugging guide
+- [WCAG Accessibility Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
+
+---
+
+## 📊 Impact Potential
+
+### Individual Level
+- Faster access to resources
+- Reduced barriers to information
+- Increased knowledge and empowerment
+- Better decision-making
+
+### Community Level
+- More efficient resource distribution
+- Increased civic participation
+- Stronger community connections
+- Collective action on shared challenges
+
+### Systemic Level
+- Reduced burden on human services
+- Improved accessibility of information
+- Democratized access to knowledge
+- Scalable support infrastructure
+
+---
+
+## 🌈 Vision
+
+**A world where everyone has easy access to the resources, knowledge, and support they need to thrive.**
+
+These agents represent a step toward:
+- More equitable access to information
+- Stronger, more connected communities
+- Technology serving social good
+- Empowered, informed citizens
+- Collective action on shared challenges
+
+---
+
+## 📝 License
+
+This project is built with Google's Agent Development Kit and is intended for:
+- Educational purposes
+- Community benefit
+- Nonprofit use
+- Research and development
+- Social good applications
+
+---
+
+## 🙏 Acknowledgments
+
+Built with:
+- Google's Agent Development Kit (ADK)
+- Gemini 2.5 Flash Lite model
+- Google Search API
+- Community input and inspiration
+
+Inspired by:
+- Community organizers and advocates
+- Social workers and counselors
+- Educators and librarians
+- Accessibility experts
+- Climate activists
+- Civic engagement leaders
+
+---
+
+## 🎉 Get Started Now!
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Setup API key (see SETUP_GUIDE.md)
+copy .env.example .env
+# Edit .env with your API key
+
+# 3. Launch agents
+python -m google.adk.cli web agents --port 8080
+
+# 4. Open http://127.0.0.1:8080 and start making a difference!
+```
+
+---
+
+**Together, we can build technology that serves everyone. Let's make a difference! 🌍✨**
+
+---
+
+*For questions, feedback, or contributions, please open an issue or reach out to the community.*

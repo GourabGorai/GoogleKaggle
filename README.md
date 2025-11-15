@@ -35,13 +35,23 @@ AI agents built with Google's Agent Development Kit (ADK) following the official
 pip install -r requirements.txt
 ```
 
-### 2. Configure API Key
-- Get your API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
-- The key is already configured in `.env` and `sample-agent/.env`
-- Or set it as an environment variable:
-  ```bash
-  set GOOGLE_API_KEY=your_api_key_here
-  ```
+### 2. Configure API Key (Required)
+⚠️ **Important:** You need to add your own Google API key to use the agents.
+
+1. Get your API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
+2. Copy `.env.example` to `.env` and add your key
+3. Create `.env` files in each agent directory with your key
+
+**See [SETUP_GUIDE.md](SETUP_GUIDE.md) for detailed instructions.**
+
+Quick setup:
+```bash
+# Copy example file
+copy .env.example .env
+
+# Edit .env and add your API key
+# Then create .env files for each agent (see SETUP_GUIDE.md)
+```
 
 ## Running the Agent
 
